@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste PROESP - Antropometria</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+ 
+  if (!localStorage.getItem("avaliacao_nome")) {
+    alert("Você precisa se identificar antes de iniciar a avaliação!");
+    window.location.href = "identificacao.html";
+  }
+</script>
+
+<div class="container-principal">
+  <div class="logo-container">
+    <div class="logo">P</div>
+    <div class="logo-text">
+      <h1>PROESP</h1>
+      <p>Programa de Esportes e Saúde</p>
+    </div>
+  </div>
+
+  <div class="info-aluno" id="infoAluno"></div>
+
+  <h1 class="page-title">Antropometria</h1>
+
+  <div class="form-container">
+    <form id="form-antropometria">
+
+      <fieldset>
+        <legend>Medidas Corporais</legend>
+
+        <label>Massa Corporal (kg)</label>
+        <input type="number" id="peso" step="0.1" required min="20" max="200">
+
+        <label>Estatura (cm)</label>
+        <input type="number" id="altura" step="0.1" required min="100" max="250">
+
+        <label>Envergadura (cm)</label>
+        <input type="number" id="envergadura" step="0.1" required min="100" max="300">
+      </fieldset>
+
+      <fieldset>
+        <legend>IMC - Índice de Massa Corporal</legend>
+
+        <label>Resultado do IMC</label>
+        <input type="text" id="imc" readonly>
+
+        <div id="feedback-imc">
+          Informe seu peso e altura para calcular o IMC
+        </div>
+      </fieldset>
+
+      <div class="acoes-botoes">
+        <button type="button" class="btn-secundario" onclick="window.location.href='index.html'">
+          ↩ Voltar
+        </button>
+
+        <button type="button" onclick="avancarParaMotores()">
+          Avançar para Testes Motores →
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="sidebar"></div>
+
+<script>
+  const nomeAluno = localStorage.getItem("avaliacao_nome");
+  const idadeAluno = localStorage.getItem("avaliacao_idade");
+  const sexoAluno = localStorage.getItem("avaliacao_sexo");
+
+  document.getElementById("infoAluno").innerHTML = `
+    <strong>Aluno:</strong> ${nomeAluno} |
+    <strong>Idade:</strong> ${idadeAluno} |
+    <strong>Sexo:</strong> ${sexoAluno}
+  `;
+
+  const peso = document.getElementById("peso");
+  const altura = document.getElementById("altura");
+  const imc = document.getElementById("imc");
+  const feedback = document.getElementById("feedback-imc");
+  const envergadura = document.getElementById("envergadura");
+
+  function calcularIMC() {
+    if (!peso.value || !altura.value) {
+      feedback.innerText = "Informe seu peso e altura para calcular o IMC";
+      imc.value = "";
+      return;
+    }
+
+    const alturaMetros = altura.value / 100;
+    const resultado = peso.value / (alturaMetros * alturaMetros);
+    imc.value = resultado.toFixed(2);
+
+    if (resultado < 18.5) feedback.innerText = "Abaixo do peso";
+    else if (resultado < 25) feedback.innerText = "Peso normal";
+    else if (resultado < 30) feedback.innerText = "Sobrepeso";
+    else feedback.innerText = "Obesidade";
+  }
+
+  peso.addEventListener("input", calcularIMC);
+  altura.addEventListener("input", calcularIMC);
+
+  function avancarParaMotores() {
+    if (!peso.value || !altura.value || !envergadura.value) {
+      alert("Preencha todas as medidas!");
+      return;
+    }
+
+    localStorage.setItem("proesp_peso", peso.value);
+    localStorage.setItem("proesp_altura", altura.value);
+    localStorage.setItem("proesp_envergadura", envergadura.value);
+    localStorage.setItem("proesp_imc", imc.value);
+
+    window.location.href = "motores.html";
+  }
+</script>
+
+</body>
+</html>
+

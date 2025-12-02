@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Identificação do Aluno</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container-principal">
+
+    <div class="logo-container">
+      <div class="logo">P</div>
+      <div class="logo-text">
+        <h1>PROESP</h1>
+        <p>Sistema de Avaliação Física</p>
+      </div>
+    </div>
+
+    <h2 class="page-title">Identificação</h2>
+
+    <div class="form-container">
+      <form id="form-identificacao">
+
+        <label>Nome:</label>
+        <input type="text" id="nome" required>
+
+        <label>Idade (máx 17):</label>
+        <input type="number" id="idade" max="17" required>
+
+        <label>Sexo:</label>
+        <select id="sexo" required>
+          <option value="">Selecione</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+        </select>
+
+        <label>Turma:</label>
+        <input type="text" id="turma" required>
+
+        <button type="submit">Iniciar Avaliação</button>
+
+      </form>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

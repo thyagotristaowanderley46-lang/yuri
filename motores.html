@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste PROESP - Testes Motores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+  if (!localStorage.getItem("avaliacao_nome")) {
+    alert("Você precisa se identificar antes de iniciar a avaliação!");
+    window.location.href = "identificacao.html";
+  }
+</script>
+
+<div class="container-principal">
+  <div class="logo-container">
+    <div class="logo">P</div>
+    <div class="logo-text">
+      <h1>PROESP</h1>
+      <p>Programa de Esportes e Saúde</p>
+    </div>
+  </div>
+
+  <div class="info-aluno" id="infoAluno"></div>
+
+  <h1 class="page-title">Testes Motores</h1>
+
+  <div class="form-container">
+    <form id="form-motores">
+
+      <fieldset>
+        <legend>Força</legend>
+        <label>Abdominais (rep)</label>
+        <input type="number" id="abdominais">
+      </fieldset>
+
+      <fieldset>
+        <legend>Velocidade</legend>
+        <label>Corrida 20m (s)</label>
+        <input type="number" id="corrida">
+      </fieldset>
+
+      <fieldset>
+        <legend>Flexibilidade</legend>
+        <label>Sentar e alcançar (cm)</label>
+        <input type="number" id="flexibilidade">
+      </fieldset>
+
+      <div class="acoes-botoes">
+        <button type="button" class="btn-secundario" onclick="window.location.href='antropomeria.html'">
+          ↩ Voltar
+        </button>
+
+        <button type="button" onclick="finalizarAvaliacao()">
+          Finalizar Avaliação →
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="sidebar"></div>
+
+<script>
+  
+  const nomeAluno = localStorage.getItem("avaliacao_nome");
+  const idadeAluno = localStorage.getItem("avaliacao_idade");
+  const sexoAluno = localStorage.getItem("avaliacao_sexo");
+
+  document.getElementById("infoAluno").innerHTML = `
+    <strong>Aluno:</strong> ${nomeAluno} |
+    <strong>Idade:</strong> ${idadeAluno} |
+    <strong>Sexo:</strong> ${sexoAluno}
+  `;
+
+  function finalizarAvaliacao() {
+    const abdominais = document.getElementById("abdominais").value;
+    const corrida = document.getElementById("corrida").value;
+    const flexibilidade = document.getElementById("flexibilidade").value;
+
+    if (!abdominais || !corrida || !flexibilidade) {
+      alert("Preencha todos os testes motores!");
+      return;
+    }
+
+    localStorage.setItem("proesp_abdominais", abdominais);
+    localStorage.setItem("proesp_corrida", corrida);
+    localStorage.setItem("proesp_flexibilidade", flexibilidade);
+
+    window.location.href = "resultados.html";
+  }
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>PROESP - Resultados Finais</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .resultado-bloco p {
+      margin: 10px 0;  
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  if (!localStorage.getItem("avaliacao_nome")) {
+    alert("Você precisa realizar a avaliação antes de ver os resultados!");
+    window.location.href = "index.html";
+  }
+</script>
+
+<div class="container-principal">
+
+  <h1 class="page-title">Resumo da Avaliação</h1>
+
+  <div class="resultado-bloco">
+    <h3>Identificação</h3>
+    <p>Nome: <span id="r-nome"></span></p>
+    <p>Idade: <span id="r-idade"></span></p>
+    <p>Sexo: <span id="r-sexo"></span></p>
+    <p>Turma: <span id="r-turma"></span></p>
+  </div>
+
+  <div class="resultado-bloco">
+    <h3>Antropometria</h3>
+    <p>Peso: <span id="r-peso"></span> kg</p>
+    <p>Altura: <span id="r-altura"></span> cm</p>
+    <p>IMC: <span id="r-imc"></span></p>
+  </div>
+
+  <div class="resultado-bloco">
+    <h3>Testes Motores</h3>
+    <p>Flexibilidade: <span id="r-flexibilidade"></span> cm</p>
+    <p>Abdominais: <span id="r-abdominais"></span> rep</p>
+    <p>Corrida 20m: <span id="r-corrida"></span> s</p>
+  </div>
+
+  <div class="acoes-botoes">
+    <button onclick="localStorage.clear(); window.location.href='index.html'">
+      Finalizar
+    </button>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById("r-nome").innerText  = localStorage.getItem("avaliacao_nome")  || "-";
+  document.getElementById("r-idade").innerText = localStorage.getItem("avaliacao_idade") || "-";
+  document.getElementById("r-sexo").innerText  = localStorage.getItem("avaliacao_sexo")  || "-";
+  document.getElementById("r-turma").innerText = localStorage.getItem("avaliacao_turma") || "-";
+
+  document.getElementById("r-peso").innerText   = localStorage.getItem("proesp_peso")   || "-";
+  document.getElementById("r-altura").innerText = localStorage.getItem("proesp_altura") || "-";
+  document.getElementById("r-imc").innerText    = localStorage.getItem("proesp_imc")    || "-";
+
+  document.getElementById("r-flexibilidade").innerText = localStorage.getItem("proesp_flexibilidade") || "-";
+  document.getElementById("r-abdominais").innerText    = localStorage.getItem("proesp_abdominais")   || "-";
+  document.getElementById("r-corrida").innerText       = localStorage.getItem("proesp_corrida")      || "-";
+</script>
+
+</body>
+</html>
